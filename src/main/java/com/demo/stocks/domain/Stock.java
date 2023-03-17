@@ -1,15 +1,47 @@
 package com.demo.stocks.domain;
 
+import com.opencsv.bean.CsvBindByName;
+
 import java.math.BigDecimal;
 
 public class Stock {
-    private String ticker;
+
+    @CsvBindByName
     private int quarter;
+
+    @CsvBindByName(column = "stock")
+    private String ticker;
+
+    @CsvBindByName
     private String date;
-    private BigDecimal open;
-    private BigDecimal close;
+
+    @CsvBindByName
+    private String open;
+
+    @CsvBindByName
+    private String close;
+
+    @CsvBindByName
     private Long volume;
-    private BigDecimal percentChangePrice;
+
+    @CsvBindByName(column = "percent_change_price")
+    private String percentChangePrice;
+
+    @CsvBindByName(column = "percent_change_volume_over_last_wk")
+    private BigDecimal percentChangeVolumeLastWeek;
+
+
+    public String toString(){
+        return "" + quarter + ", " + ticker + ", " + date + ", " + open;
+    }
+
+    public BigDecimal getPercentChangeVolumeLastWeek() {
+        return percentChangeVolumeLastWeek;
+    }
+
+    public void setPercentChangeVolumeLastWeek(BigDecimal percentChangeVolumeLastWeek) {
+        this.percentChangeVolumeLastWeek = percentChangeVolumeLastWeek;
+    }
 
     public String getTicker() {
         return ticker;
@@ -35,22 +67,6 @@ public class Stock {
         this.date = date;
     }
 
-    public BigDecimal getOpen() {
-        return open;
-    }
-
-    public void setOpen(BigDecimal open) {
-        this.open = open;
-    }
-
-    public BigDecimal getClose() {
-        return close;
-    }
-
-    public void setClose(BigDecimal close) {
-        this.close = close;
-    }
-
     public Long getVolume() {
         return volume;
     }
@@ -59,11 +75,27 @@ public class Stock {
         this.volume = volume;
     }
 
-    public BigDecimal getPercentChangePrice() {
+    public String getOpen() {
+        return open;
+    }
+
+    public void setOpen(String open) {
+        this.open = open;
+    }
+
+    public String getClose() {
+        return close;
+    }
+
+    public void setClose(String close) {
+        this.close = close;
+    }
+
+    public String getPercentChangePrice() {
         return percentChangePrice;
     }
 
-    public void setPercentChangePrice(BigDecimal percentChangePrice) {
+    public void setPercentChangePrice(String percentChangePrice) {
         this.percentChangePrice = percentChangePrice;
     }
 }
