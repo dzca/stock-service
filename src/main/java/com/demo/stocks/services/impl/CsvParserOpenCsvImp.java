@@ -30,10 +30,9 @@ public class CsvParserOpenCsvImp implements CsvParser {
                     .build()
                     .parse();
 
-
             return stocksList;
         } catch (IOException ioe){
-            log.info("Failed to read stock file; {}, error:{}", path.getFileName(),ioe.getMessage());
+            log.error("Bad stock file; {}, read failed, error:{}", path.getFileName(),ioe.getMessage());
             return new ArrayList<>();
         }
     }
