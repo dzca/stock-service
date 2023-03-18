@@ -1,8 +1,10 @@
 package com.demo.stocks.services.impl;
 
 import com.demo.stocks.domain.Stock;
+import com.demo.stocks.repository.StockRepository;
 import com.demo.stocks.services.CsvParser;
 import com.demo.stocks.services.FileProcessor;
+import com.demo.stocks.services.StockService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,9 @@ public class FileProcessorImpl implements FileProcessor {
 
     @Autowired
     private CsvParser csvParser;
+
+    @Autowired
+    private StockService stockService;
 
     @Value("${data.directory}")
     private String DATA_FOLDER;
@@ -61,20 +66,24 @@ public class FileProcessorImpl implements FileProcessor {
                 log.debug("parse file start, file = {}", p.toString());
 
                 List<Stock> stocks = csvParser.readStocks(p);
+                String fileName = p.getFileName().toString();
+                try{
+                    if(stocks.isEmpty()){
+                        // move the bad file to bad directory
+                        backUpFile(accountName, fileName);
 
-                if(stocks.isEmpty()){
-                    // move the bad file to bad directory
-                    backUpFile(accountName, p.getFileName().toString());
-
-                } else {
-
-                    //TODO: remove file
+                    } else {
+                        //TODO: implement the redis inserts and file removal
+                        stockService.batchSave(stocks);
+                        Files.deleteIfExists(p);
+                    }
+                } catch (IOException ioe){
+                    log.error("Failed to process file ({}) after parsing, error:{}", fileName, ioe.getMessage());
                 }
-                //TODO: implement the redis inserts and file removal
             }
 
         } catch (IOException ioe){
-            log.error("Failed to read files in account folder; {}, error:{}", accountPath, ioe.getMessage());
+            log.error("Failed to process files in account folder; {}, error:{}", accountPath, ioe.getMessage());
         }
     }
 

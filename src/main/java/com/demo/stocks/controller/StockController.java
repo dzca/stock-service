@@ -2,6 +2,8 @@ package com.demo.stocks.controller;
 
 
 import com.demo.stocks.domain.FileUploadResponse;
+import com.demo.stocks.domain.Stock;
+import com.demo.stocks.repository.StockRepository;
 import com.demo.stocks.services.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(path="/stocks")
@@ -24,19 +27,13 @@ public class StockController {
     @Autowired
     private UploadService uploadService;
 
-    @GetMapping(value="/ticker/{ticker}")
-    public @ResponseBody String getByTicker (@PathVariable String ticker) {
-        return ticker;
-    }
+    @Autowired
+    private StockRepository stockRepository;
 
-    /**
-     * Allow query groups, e.g. date range and tickers
-     * @param query
-     * @return
-     */
-    @GetMapping(value="/query/{query}")
-    public @ResponseBody String queryStocks (@PathVariable String query) {
-        return query;
+    @GetMapping(value="/ticker/{ticker}")
+    public ResponseEntity<List<Stock>> getByTicker (@PathVariable String ticker) {
+        List<Stock> stocks = stockRepository.searchStocksByTicker(ticker);
+        return new ResponseEntity<>(stocks, HttpStatus.OK);
     }
 
     @PostMapping(value="/upload")
@@ -57,5 +54,11 @@ public class StockController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping(value="/")
+    public ResponseEntity<Stock> saveStock(
+            @RequestBody Stock stock) {
 
+        stockRepository.saveStock(stock);
+        return new ResponseEntity<>(stock, HttpStatus.OK);
+    }
 }

@@ -2,9 +2,10 @@ package com.demo.stocks.domain;
 
 import com.opencsv.bean.CsvBindByName;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Stock {
+public class Stock implements Serializable {
 
     @CsvBindByName
     private int quarter;
