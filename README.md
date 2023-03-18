@@ -1,7 +1,7 @@
 # stock-service
 springboot service for upload stocks
 
-## assumption
+## Assumption
 - record in uploaded file come from single source, e.g. duplicated records are same, overwrite is safe.
 - multiple user can upload file in same time, but file contents might have overlay.
 - uploaded data a stored in one table, all query are searching on the same table.
@@ -27,7 +27,7 @@ sample stock json
 }
 ```
 
-## implementation detail
+## Implementation detail
 1. file uploaded into a disk, different user have their own account name.
 2. uploaded file a saved in a data folder
 3. in every 5 sec, a background process will load a parser to read the file into redis.
@@ -35,18 +35,11 @@ sample stock json
 5. if user uploaded a bad file that cannot process, it will be stored in a folder for auditing
 6. the requests will invalid token will be rejected(HTTP 401)
 
-## Todo
-1. test file upload
-2. test scheduler
-3. test file parser
-4. test redis io
+## Error codes
 
-
-## Errors
-
-50001, DATABASE_ERROR, (500)
-50002, CACHE_ERROR, (500)
-40003, INVALID_ACCOUNT, (400)
-40004, FILE_SIZE_EXCEEDS, (400)
-40005, INVALID_TOKEN, (401)
+- 50001, DATABASE_ERROR, (500)
+- 50002, CACHE_ERROR, (500)
+- 40003, INVALID_ACCOUNT, (400)
+- 40004, FILE_SIZE_EXCEEDS, (400)
+- 40005, INVALID_TOKEN, (401)
 
