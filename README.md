@@ -1,9 +1,25 @@
 # stock-service
-springboot service for upload stocks
+stocks server application allowing user to upload the data file(csv) and query the stock price
+implemented with spring-boot, redis and docker.
+
+## System requirement
+Following application is required to run application
+1. maven 3.9.1 or above
+2. openjdk 17 or above
+3. docker Engine: 20.10.23, Compose: v2.15.1
+4. git
 
 ## How to run installation
-1. mvn install -DskipTests=true
-2. docker-compose up --build
+1. download the source code by running git command:
+    git clone https://github.com/dzca/stock-service.git
+
+2. go to stock-service directory and run build commands, as following:
+```
+cd stock-service  
+mvn install -DskipTests=true 
+docker-compose up --build
+```
+
 
 
 ## Assumption
