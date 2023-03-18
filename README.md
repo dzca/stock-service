@@ -8,7 +8,7 @@ springboot service for upload stocks
 - the file upload limit is 1 kb.
 - total data size in any time does not exceed 4GB
 
-## function
+## API
 1. upload file [POST] /stocks/upload
 2. query by ticker [GET] /stocks/ticker/{ticker}
 3. add a new stock [POST] /stocks/
@@ -30,7 +30,7 @@ sample stock json
 ## implementation detail
 1. file uploaded into a disk, different user have their own account name.
 2. uploaded file a saved in a data folder
-3, in every 5 sec, a background process will load a parser to read the file into redis.
+3. in every 5 sec, a background process will load a parser to read the file into redis.
 4. the data file will be deleted after read
 5. if user uploaded a bad file that cannot process, it will be stored in a folder for auditing
 6. the requests will invalid token will be rejected(HTTP 401)
