@@ -1,6 +1,11 @@
 # stock-service
 springboot service for upload stocks
 
+## How to run installation
+1. mvn install -DskipTests=true
+2. docker-compose up --build
+
+
 ## Assumption
 - record in uploaded file come from single source, e.g. duplicated records are same, overwrite is safe.
 - multiple user can upload file in same time, but file contents might have overlay.

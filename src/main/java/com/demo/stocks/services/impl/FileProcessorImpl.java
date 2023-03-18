@@ -34,10 +34,10 @@ public class FileProcessorImpl implements FileProcessor {
     @Autowired
     private StockService stockService;
 
-    @Value("${data.directory}")
+    @Value("${app.data.upload}")
     private String DATA_FOLDER;
 
-    @Value("${bad.data.directory}")
+    @Value("${app.data.bad}")
     private String BAD_DATA_FOLDER;
 
     @Override

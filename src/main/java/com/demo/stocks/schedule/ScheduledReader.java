@@ -23,7 +23,7 @@ public class ScheduledReader {
     private static final Logger log = LoggerFactory.getLogger(ScheduledReader.class);
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Value("${data.directory}")
+    @Value("${app.data.upload}")
     private String DATA_FOLDER;
 
     @Autowired

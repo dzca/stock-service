@@ -19,10 +19,10 @@ import java.util.Set;
 public class StockRepositoryImpl implements StockRepository {
 
     private static final Logger log = LoggerFactory.getLogger(StockRepositoryImpl.class);
-    @Value("${redis.key.stock}")
+    @Value("${app.redis.key}")
     private String REIDS_KEY_STOCK;
 
-    @Value("${redis.idx}")
+    @Value("${app.redis.idx}")
     private String REIDS_IDX;
 
     @Autowired

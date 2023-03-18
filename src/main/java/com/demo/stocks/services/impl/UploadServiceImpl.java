@@ -16,7 +16,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class UploadServiceImpl implements UploadService {
 
-    @Value("${data.directory}")
+    @Value("${app.data.upload}")
     private String DATA_FOLDER;
 
     public void saveFile(String accountName, String fileName, MultipartFile multipartFile)

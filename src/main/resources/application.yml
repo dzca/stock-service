@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: redis-service
+
+  redis:
+    port: 6379
+    password: Zez7XqwdWo1cDYS02ju
+    host: redis
+
+  servlet:
+    multipart:
+      max-file-size: 1KB
+      max-request-size: 1KB
+
+logging:
+  file:
+    path: stock-service/logs
+  level:
+    com.demo.stocks: DEBUG
+
+app:
+  data:
+    bad: stock-service/bad
+    upload: stock-service/upload
+  redis:
+    key: stock
+    idx: idx
