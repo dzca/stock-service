@@ -64,3 +64,6 @@ sample stock json
 - 40004, FILE_SIZE_EXCEED, (400)
 - 40005, INVALID_TOKEN, (401)
 
+## Tests
+- postman collections and environments are under 'postman' folder
+- test directory have some sample for testing with Mokito and spring-test 

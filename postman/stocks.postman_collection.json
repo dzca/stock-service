@@ -1,0 +1,647 @@
+{
+	"info": {
+		"_postman_id": "b66e683e-2552-4c04-b3e7-d16f1f7fd817",
+		"name": "stocks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "327995"
+	},
+	"item": [
+		{
+			"name": "upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "account",
+						"value": "aabbcc",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/dustinzhang/d0/d1.data"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/upload",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "upload -200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "account",
+								"value": "aabbcc",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/dustinzhang/d0/d1.data"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Mar 2023 10:44:03 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"fileName\": \"d1.data\",\n    \"size\": 575\n}"
+				}
+			]
+		},
+		{
+			"name": "upload with invalid user account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "account",
+						"value": "aabbxx",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/dustinzhang/d0/d1.data"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/upload",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "upload with invalid user account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "account",
+								"value": "aabbxx",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/dustinzhang/d0/d1.data"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Mar 2023 11:57:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": \"INVALID_ACCOUNT\"\n}"
+				}
+			]
+		},
+		{
+			"name": "upload with bad token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "account",
+						"value": "aabbcc",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "bad-token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/dustinzhang/d0/d1.data"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/upload",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "upload with bad token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "account",
+								"value": "aabbcc",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "bad-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/dustinzhang/d0/d1.data"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Mar 2023 11:57:34 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": \"INVALID_TOKEN\"\n}"
+				}
+			]
+		},
+		{
+			"name": "search by ticker",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/ticker/AA",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"ticker",
+						"AA"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "search by ticker",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/ticker/AA",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ticker",
+								"AA"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Mar 2023 11:12:21 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"quarter\": 1,\n        \"ticker\": \"AA\",\n        \"date\": \"1/28/2011\",\n        \"open\": \"$15.87\",\n        \"close\": \"$16.13\",\n        \"volume\": 151379173,\n        \"percentChangePrice\": \"1.63831\",\n        \"percentChangeVolumeLastWeek\": 9.355500109\n    },\n    {\n        \"quarter\": 1,\n        \"ticker\": \"AA\",\n        \"date\": \"1/21/2011\",\n        \"open\": \"$16.19\",\n        \"close\": \"$15.79\",\n        \"volume\": 138428495,\n        \"percentChangePrice\": \"-2.47066\",\n        \"percentChangeVolumeLastWeek\": -43.02495926\n    },\n    {\n        \"quarter\": 1,\n        \"ticker\": \"AA\",\n        \"date\": \"1/14/2011\",\n        \"open\": \"$16.71\",\n        \"close\": \"$15.97\",\n        \"volume\": 242963398,\n        \"percentChangePrice\": \"-4.42849\",\n        \"percentChangeVolumeLastWeek\": 1.380223028\n    },\n    {\n        \"quarter\": 1,\n        \"ticker\": \"AA\",\n        \"date\": \"1/7/2011\",\n        \"open\": \"$15.82\",\n        \"close\": \"$16.42\",\n        \"volume\": 239655616,\n        \"percentChangePrice\": \"3.79267\",\n        \"percentChangeVolumeLastWeek\": null\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "search by ticker with bad token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "bad-token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/ticker/AA",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"ticker",
+						"AA"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "search by ticker with bad token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "bad-token",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/ticker/AA",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ticker",
+								"AA"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Mar 2023 11:57:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": \"INVALID_TOKEN\"\n}"
+				}
+			]
+		},
+		{
+			"name": "save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"quarter\": 1,\n        \"ticker\": \"XYZ\",\n        \"date\": \"3/18/2023\",\n        \"open\": \"$56.19\",\n        \"close\": \"$55.79\",\n        \"volume\": 138428495,\n        \"percentChangePrice\": \"-2.47066\",\n        \"percentChangeVolumeLastWeek\": -43.02495926\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "save",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"quarter\": 1,\n        \"ticker\": \"XYZ\",\n        \"date\": \"3/18/2023\",\n        \"open\": \"$56.19\",\n        \"close\": \"$55.79\",\n        \"volume\": 138428495,\n        \"percentChangePrice\": \"-2.47066\",\n        \"percentChangeVolumeLastWeek\": -43.02495926\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Mar 2023 11:58:02 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"quarter\": 1,\n    \"ticker\": \"XYZ\",\n    \"date\": \"3/18/2023\",\n    \"open\": \"$56.19\",\n    \"close\": \"$55.79\",\n    \"volume\": 138428495,\n    \"percentChangePrice\": \"-2.47066\",\n    \"percentChangeVolumeLastWeek\": -43.02495926\n}"
+				}
+			]
+		},
+		{
+			"name": "save with bad token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "bad-token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"quarter\": 1,\n        \"ticker\": \"XYZ\",\n        \"date\": \"3/18/2023\",\n        \"open\": \"$56.19\",\n        \"close\": \"$55.79\",\n        \"volume\": 138428495,\n        \"percentChangePrice\": \"-2.47066\",\n        \"percentChangeVolumeLastWeek\": -43.02495926\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "save with bad token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "bad-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"quarter\": 1,\n        \"ticker\": \"XYZ\",\n        \"date\": \"3/18/2023\",\n        \"open\": \"$56.19\",\n        \"close\": \"$55.79\",\n        \"volume\": 138428495,\n        \"percentChangePrice\": \"-2.47066\",\n        \"percentChangeVolumeLastWeek\": -43.02495926\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Mar 2023 11:58:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": \"INVALID_TOKEN\"\n}"
+				}
+			]
+		}
+	]
+}
