@@ -8,6 +8,7 @@ Following application is required to run application
 2. openjdk 17 or above
 3. docker Engine: 20.10.23, Compose: v2.15.1
 4. git
+5. postman
 
 ## How to run installation
 1. download the source code by running git command:
@@ -19,6 +20,9 @@ cd stock-service
 mvn install -DskipTests=true 
 docker-compose up --build
 ```
+3. after server started at port 8080. load the postman collection and environment.
+and run 'upload' tests to populate data for testing. accepted accounts are:
+   "aabbcc", "xxyyzz", "ddeekk"
 
 
 
@@ -67,3 +71,30 @@ sample stock json
 ## Tests
 - postman collections and environments are under 'postman' folder
 - test directory have some sample for testing with Mokito and spring-test 
+- you can also run curl for testing as below:
+
+```
+curl --location --request POST 'http://localhost:8080/stocks/upload' \
+--header 'account: aabbcc' \
+--header 'token: Nipcx3WZJQvQqr07RZ8qrHMXTiYqP3rBpX3NgHgIWc3USkd1hwBQyt8WC9otXG086s30L+zBnzrEN2ZN' \
+--form 'file=@"/Users/replace-with-your-directory/d1.data"'
+
+
+curl --location --request GET 'http://localhost:8080/stocks/ticker/AA' \
+--header 'token: Nipcx3WZJQvQqr07RZ8qrHMXTiYqP3rBpX3NgHgIWc3USkd1hwBQyt8WC9otXG086s30L+zBnzrEN2ZN'
+
+curl --location --request POST 'http://localhost:8080/stocks/' \
+--header 'token: Nipcx3WZJQvQqr07RZ8qrHMXTiYqP3rBpX3NgHgIWc3USkd1hwBQyt8WC9otXG086s30L+zBnzrEN2ZN' \
+--header 'Content-Type: application/json' \
+--data-raw '    {
+        "quarter": 1,
+        "ticker": "XYZ",
+        "date": "3/18/2023",
+        "open": "$56.19",
+        "close": "$55.79",
+        "volume": 138428495,
+        "percentChangePrice": "-2.47066",
+        "percentChangeVolumeLastWeek": -43.02495926
+    }'
+
+```
