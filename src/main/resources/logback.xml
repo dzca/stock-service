@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
-    <property name="LOG_PATH" value="${LOG_PATH}"/>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <property name="logPattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
 
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>
-                ${logPattern}
-            </pattern>
-        </encoder>
-    </appender>
+    <property resource="application.properties" />
+    <property name="LOG_PATH" value="${LOG_PATH}" />
+    <property name="APP_NAME" value="${spring.application.name}" />
 
-    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/${springAppName}/${springAppName}.log</file>
-        <encoder>
-            <pattern>
-                ${logPattern}
-            </pattern>
-        </encoder>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${springAppName}/${springAppName}_%d{dd-MM-yyyy}.log</fileNamePattern>
-            <maxHistory>10</maxHistory>
-            <totalSizeCap>10MB</totalSizeCap>
+            <fileNamePattern>${LOG_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>2MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
+        <append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
 
-    <springProfile name="local | dev">
-        <logger name="com.demo.stocks" additivity="false" level="debug">
-            <appender-ref ref="STDOUT"/>
-        </logger>
-        <root level="DEBUG">
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="STDOUT"/>
-        </root>
-    </springProfile>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-    <root level="info">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="STDOUT"/>
+    <logger name="org.springframework.context.annotation" level="INFO" />
+    <logger name="com.demo.stocks" level="DEBUG" />
+
+    <!-- Final filter for production -->
+    <root level="INFO">
+        <!-- production environment, remove stdout -->
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
     </root>
-    <logger name="com.demo.stocks" additivity="false" level="debug">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="STDOUT"/>
-    </logger>
-
 </configuration>

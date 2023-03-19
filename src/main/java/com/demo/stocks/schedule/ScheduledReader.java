@@ -34,7 +34,7 @@ public class ScheduledReader {
      * and the start time of the next execution of the task
      */
     @Scheduled(fixedDelay = 5000)
-    public void reportCurrentTime() {
+    public void readData() {
         log.info("Processing data directory at time: {}", dateFormat.format(new Date()));
 
         fileProcessor.processDataRoot(DATA_FOLDER);

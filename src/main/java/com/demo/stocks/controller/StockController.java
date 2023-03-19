@@ -62,7 +62,6 @@ public class StockController {
             throw new StockFileUploadException(ErrorCode.FILE_UPLOAD_ERROR, e);
         }
 
-
         FileUploadResponse response = new FileUploadResponse();
         response.setFileName(fileName);
         response.setSize(size);
