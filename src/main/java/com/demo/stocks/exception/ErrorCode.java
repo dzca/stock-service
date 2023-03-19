@@ -3,7 +3,7 @@ package com.demo.stocks.exception;
 public class ErrorCode {
 
     // 500
-    public static final String DATABASE_ERROR = "DATABASE_ERROR";
+    public static final String SERVER_ERROR = "SERVER_ERROR";
     public static final String CACHE_ERROR = "CACHE_ERROR";
     public static final String FILE_UPLOAD_ERROR = "FILE_UPLOAD_ERROR";
 

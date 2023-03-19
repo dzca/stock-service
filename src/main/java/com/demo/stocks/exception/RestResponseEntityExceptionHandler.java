@@ -1,7 +1,9 @@
 package com.demo.stocks.exception;
 
+import io.lettuce.core.RedisConnectionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,7 +22,15 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     protected ResponseEntity<RestError> handleGeneralRestError(Exception ex, WebRequest request) {
         log.error("handleGeneralRestError, err={}", ex.getLocalizedMessage());
         RestError err = new RestError();
-        err.setErrorCode(ErrorCode.INVALID_ACCOUNT);
+        err.setErrorCode(ErrorCode.SERVER_ERROR);
+        return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = { RedisConnectionException.class,  RedisConnectionFailureException.class})
+    protected ResponseEntity<RestError> handleRedisConnectionException(Exception ex, WebRequest request) {
+        log.error("handleRedisConnectionException, err={}", ex.getLocalizedMessage());
+        RestError err = new RestError();
+        err.setErrorCode(ErrorCode.CACHE_ERROR);
         return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
