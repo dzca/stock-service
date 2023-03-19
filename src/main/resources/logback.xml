@@ -26,11 +26,24 @@
             <totalSizeCap>10MB</totalSizeCap>
         </rollingPolicy>
     </appender>
+
+    <springProfile name="local | dev">
+        <logger name="com.demo.stocks" additivity="false" level="debug">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
     <root level="info">
+        <appender-ref ref="CONSOLE" />
         <appender-ref ref="STDOUT"/>
     </root>
-
     <logger name="com.demo.stocks" additivity="false" level="debug">
+        <appender-ref ref="CONSOLE" />
         <appender-ref ref="STDOUT"/>
     </logger>
+
 </configuration>

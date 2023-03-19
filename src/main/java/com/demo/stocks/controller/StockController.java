@@ -3,7 +3,11 @@ package com.demo.stocks.controller;
 
 import com.demo.stocks.domain.FileUploadResponse;
 import com.demo.stocks.domain.Stock;
+import com.demo.stocks.exception.ErrorCode;
+import com.demo.stocks.exception.StockFileUploadException;
+import com.demo.stocks.exception.InvalidAccountNameException;
 import com.demo.stocks.repository.StockRepository;
+import com.demo.stocks.services.AuthenticationService;
 import com.demo.stocks.services.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +34,9 @@ public class StockController {
     @Autowired
     private StockRepository stockRepository;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @GetMapping(value="/ticker/{ticker}")
     public ResponseEntity<List<Stock>> getByTicker (@PathVariable String ticker) {
         List<Stock> stocks = stockRepository.searchStocksByTicker(ticker);
@@ -40,12 +47,21 @@ public class StockController {
     public ResponseEntity<FileUploadResponse> handleFileUpload(
             @RequestHeader("account") String accountName,
             @RequestParam("file") MultipartFile multipartFile,
-            RedirectAttributes redirectAttributes) throws IOException {
+            RedirectAttributes redirectAttributes) throws InvalidAccountNameException, StockFileUploadException {
         log.info("handleFileUpload() accountName={}", accountName);
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         long size = multipartFile.getSize();
 
-        uploadService.saveFile(accountName, fileName, multipartFile);
+        if(!authenticationService.isAccountNameValid(accountName)){
+            throw new InvalidAccountNameException(ErrorCode.INVALID_ACCOUNT);
+        }
+        try{
+            uploadService.saveFile(accountName, fileName, multipartFile);
+        } catch (IOException e){
+            log.error("File upload error", e.getMessage());
+            throw new StockFileUploadException(ErrorCode.FILE_UPLOAD_ERROR, e);
+        }
+
 
         FileUploadResponse response = new FileUploadResponse();
         response.setFileName(fileName);

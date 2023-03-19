@@ -57,10 +57,10 @@ sample stock json
 6. the requests will invalid token will be rejected(HTTP 401)
 
 ## Error codes
-
+- 50000, SERVER_ERROR, (500)
 - 50001, DATABASE_ERROR, (500)
 - 50002, CACHE_ERROR, (500)
 - 40003, INVALID_ACCOUNT, (400)
-- 40004, FILE_SIZE_EXCEEDS, (400)
+- 40004, FILE_SIZE_EXCEED, (400)
 - 40005, INVALID_TOKEN, (401)
 
